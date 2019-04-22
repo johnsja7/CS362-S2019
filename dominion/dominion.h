@@ -89,6 +89,16 @@ int initializeGame(int numPlayers, int kingdomCards[10], int randomSeed,
 
 Cards not in game should initialize supply position to -1 */
 
+int handle_adventurer(struct gameState *state, int currentPlayer, int handPos, int temphand[], int drawntreasure,int z);
+
+int handle_smithy(struct gameState *state, int currentPlayer, int handPos);
+
+int handle_councilRoom(struct gameState *state, int currentPlayer, int handPos);
+
+int handle_village(struct gameState *state, int currentPlayer, int handPos);
+
+int handle_steward(int handPos, int choice1, int choice2, int choice3,  struct gameState *state, int currentPlayer); 
+
 int shuffle(int player, struct gameState *state);
 /* Assumes all cards are now in deck array (or hand/played):  discard is
  empty */
