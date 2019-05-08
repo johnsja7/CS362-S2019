@@ -13,18 +13,21 @@ int main ()
 {
 	int newCards = 3;
         int discarded = 1;
-        int extraCoins = 0;
-        int shuffledCards = 0;
-
-        int i, j, m;
-	int temphand[];
-	int drawntreasure;
-        int handpos = 0; choice1 = 0, choice2 = 0, choice3 = 0, bonus = 0;
+	int drawntreasure = 0;
+	
+	int treasureDrawn;
+	int testtreasureDrawn;
+	int temphand[10];
+        int handPos = 0;
         int numPlayers = 2;
         int currentPlayer = 0;
         int seed = 1000;
 
         int k[10] = {adventurer, embargo, village, minion, mine, cutpurse, sea_hag, tribute, smithy, council_room};
+	for (int i = 0; i < 10; i++)
+	{
+		temphand[i] = -1;
+	}
 
         struct gameState state, test;
 
@@ -32,24 +35,31 @@ int main ()
 
         memcpy(&test, &state, sizeof(struct gameState));
 
-	handle_adventurer(&test, currentPlayer, handPos, temphand[], drawntreasure, 0);
+	handle_adventurer(&test, currentPlayer, handPos, temphand, drawntreasure, 0);
 
 	//TEST 1
-	
-	assert(test.deckCount[currentPlayer] == state.deckCount[currentPlayer] - 1);
 
-        assert(test.handCount[currentPlayer] == state.handCount[currentPlayer] + 1);
+	//Checking that the deck has had	
+	assert(test.deckCount[currentPlayer] == state.deckCount[currentPlayer] - newCards);
+	printf("Deck Count Test - PASSED!\n");
 
-        assert(test.hand[player][state.handCount[player]] != -1);
+        assert(test.handCount[currentPlayer] == state.handCount[currentPlayer] + newCards - discarded);
+	printf("Hand Count Test - PASSED!\n");
 
-        assert(test.playedCardCount + 2 == state.playerCardCount);
+        assert(test.hand[currentPlayer][state.handCount[currentPlayer]] != -1);
+	printf("Card in Hand Test - PASSED!\n");
+
+        assert(test.playedCardCount <= state.playedCardCount + 2);
+	printf("Played Card Count Test - PASSED!\n");
 
 	//TEST 2
 	
-        assert(test.discardCount[currentPlayer] == state.discardCount[currentPlayer] + 1);
+        //assert(test.discardCount[currentPlayer] == state.discardCount[currentPlayer] + 1);
+	//printf("Discard Count Test - PASSED!\n");
 
 	//TEST 3
-	
+
+	//Checking that the treasure drawn	
 	for (int i = 0; i < state.handCount[currentPlayer]; i++)
         {
                 if (state.hand[currentPlayer][i] == copper || state.hand[currentPlayer][i] == silver || state.hand[currentPlayer][i] == gold)
@@ -66,7 +76,14 @@ int main ()
                 }
         }
 
-        assert(treasureDrawn == testtreasureDrawn);
+	//Checking that the tempHand is not empty
+	if (temphand[1] != -1)
+	{
+		assert(temphand[0] != -1);	
+	}	
+
+        assert(treasureDrawn + 2 == testtreasureDrawn);
+	printf("Treasure Drawn Test - PASSED!\n");
 
         printf("Adventure Card Test - PASSED!\n");
 

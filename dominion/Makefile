@@ -1,7 +1,52 @@
-CFLAGS= -Wall -fpic -coverage -lm -std=c99
+CFLAGS= -Wall -fprofile-arcs -ftest-coverage -g -fpic -coverage -lm -std=c99
 
 rngs.o: rngs.h rngs.c
 	gcc -c rngs.c -g  $(CFLAGS)
+
+unittests: cardtest1.o cardtest2.o cardtest3.o cardtest4.o unittest1.o unittest2.o unittest3.o unittest4.o unittest.o dominion.o rngs.o
+	gcc -o unittests cardtest1.o cardtest2.o cardtest3.o cardtest4.o unittest1.o unittest2.o unittest3.o unittest4.o unittest.o dominion.o rngs.o $(CFLAGS)
+
+unittest1:  unittest1.o dominion.o rngs.o
+	gcc -o unittest1 unittest1.o dominion.o rngs.o $(CFLAGS)
+
+unittest2:  unittest2.o dominion.o rngs.o
+	gcc -o unittest2 unittest2.o dominion.o rngs.o $(CFLAGS)
+
+unittest3:  unittest3.o dominion.o rngs.o
+	gcc -o unittest3 unittest3.o dominion.o rngs.o $(CFLAGS)
+
+unittest4:  unittest4.o dominion.o rngs.o
+	gcc -o unittest4 unittest4.o dominion.o rngs.o $(CFLAGS)
+
+cardtest1: cardtest1.o dominion.o rngs.o
+	gcc -o cardtest1 cardtest1.o dominion.o rngs.o $(CFLAGS)
+
+cardtest2: cardtest2.o dominion.o rngs.o
+	gcc -o cardtest2 cardtest2.o dominion.o rngs.o $(CFLAGS)
+
+cardtest3: cardtest3.o dominion.o rngs.o
+	gcc -o cardtest3 cardtest3.o dominion.o rngs.o $(CFLAGS)
+
+cardtest4: cardtest4.o dominion.o rngs.o
+	gcc -o cardtest4 cardtest4.o dominion.o rngs.o $(CFLAGS)
+
+unittestresults: unittest1 unittest2 unittest3 unittest4 cardtest1 cardtest2 cardtest3 cardtest4
+	unittest1 > unittestresults.out
+	gcov unittest1.c >> unittestresults.out
+	unittest2 >> unittestresults.out
+	gcov unittest2.c >> unittestresults.out
+	unittest3 >> unittestresults.out
+	gcov unittest3.c >> unittestresults.out
+	unittest4 >> unittestresults.out
+	gcov unittest4.c >> unittestresults.out
+	cardtest1 >> unittestresults.out
+	gcov cardtest1.c >> unittestresults.out
+	cardtest2 >> unittestresults.out
+	gcov cardtest2.c >> unittestresults.out
+	cardtest3 >> unittestresults.out
+	gcov cardtest3.c >> unittestresults.out
+	cardtest4 >> unittestresults.out
+	gcov cardtest4.c >> unittestresults.out
 
 dominion.o: dominion.h dominion.c rngs.o
 	gcc -c dominion.c -g  $(CFLAGS)

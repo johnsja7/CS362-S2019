@@ -16,9 +16,9 @@ int main ()
         int extraCoins = 0;
         int shuffledCards = 0;
 	int numberActions = 2;
-	int playedCount = 1;
+	int playedCount = 0;
         int i, j, m;
-        int handpos = 0; choice1 = 0, choice2 = 0, choice3 = 0, bonus = 0;
+        int handpos = 0, choice1 = 0, choice2 = 0, choice3 = 0, bonus = 0;
         int numPlayers = 2;
         int currentPlayer = 0;
         int seed = 1000;
@@ -31,21 +31,28 @@ int main ()
 
         memcpy(&test, &state, sizeof(struct gameState));
 
-	//TEST 1
-
         cardEffect(village, choice1, choice2, choice3, &test, handpos, &bonus);
 
-	assert(state.playedCardCount + playerCount == test.playedCardCount);
+	//TEST 1
+
+	//Testing the number of played cards
+	assert(state.playedCardCount + playedCount == test.playedCardCount);
+	printf("Played Card Count Test - PASSED!\n");
 
 	assert(state.handCount[currentPlayer] + newCards - discarded == test.handCount[currentPlayer]);
+	printf("Hand Count Test - PASSED!\n");
 
-	assert(state.numActions[currentPlayer] + numberActions == test.numActions[currentPlayer]);
+	assert(state.numActions + numberActions == test.numActions);
+	printf("Number of Actions Test - PASSED!\n");
 
 	assert(state.discardCount[currentPlayer] + discarded == test.discardCount[currentPlayer]);
+	printf("Discard Count Test - PASSED!\n");
 
 	//TEST 2
 	
-	assert(state.hand[player][test.handCount[player] - 1] != -1)
+	//Checking if the village card was added to hand
+	assert(state.hand[currentPlayer][test.handCount[currentPlayer] - 1] != -1);
+	printf("Card Added to Hand Test - PASSED!\n");
 
 	printf("Village Card Test - PASSED!\n");
 
