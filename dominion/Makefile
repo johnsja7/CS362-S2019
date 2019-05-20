@@ -3,6 +3,23 @@ CFLAGS= -Wall -fpic -coverage -lm -std=c99
 rngs.o: rngs.h rngs.c
 	gcc -c rngs.c -g  $(CFLAGS)
 
+randomtestcard1: randomtestcard1.c dominion.o rngs.o
+	gcc -o randomtestcard1 -coverage randomtestcard1.c dominion.o rngs.o -lm
+
+randomtestcard2: randomtestcard2.c dominion.o rngs.o
+	gcc -o randomtestcard2 -coverage randomtestcard2.c dominion.o rngs.o -lm
+
+randomtestadventurer: randomtestadventurer.c dominion.o rngs.o
+	gcc -o randomtestadventurer -coverage randomtestadventurer.c dominion.o rngs.o -lm
+
+randomtestresults: randomtestcard1 randomtestcard2 randomtestadventurer
+	./randomtestcard1 &> randomtestresults.out
+	gcov randomtestcard1.c >> randomtestresults.out
+	./randomtestcard2 &>> randomtestresults.out
+	gcov randomtestcard2.c >> randomtestresults.out
+	./randomtestadventurer &>> randomtestresults.out
+	gcov randomtestadventurer.c >> randomtestresults.out
+
 dominion.o: dominion.h dominion.c rngs.o
 	gcc -c dominion.c -g  $(CFLAGS)
 
