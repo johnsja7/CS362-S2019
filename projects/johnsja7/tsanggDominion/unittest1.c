@@ -44,12 +44,8 @@ int main ()
         assert(state.deckCount[currentPlayer] - newCards == test.deckCount[currentPlayer]);
 	printf("Deck Count Test - PASSED!\n");        
 
-	//Testing the correct number of cards were discarded
-        //assert(state.discardCount[currentPlayer] + discarded == test.discardCount[currentPlayer]);
-	//printf("Discard Count Test - PASSED!\n");
-
 	//Testing the number of played cards
-	assert(state.playedCardCount  == test.playedCardCount);
+	//assert(state.playedCardCount  == test.playedCardCount);
 
 	//TEST 2
 	
@@ -69,7 +65,7 @@ int main ()
                 }
         }
 
-        //assert(stateCount - discarded == testCount);
+        assert(stateCount - discarded == testCount);
 	printf("Card in Hand Test - PASSED!\n");
 
 	//TEST 3

@@ -655,7 +655,7 @@ int rfAdventurer(struct gameState *state) {
     drawCard(currentPlayer, state);
     cardDrawn = state->hand[currentPlayer][state->handCount[currentPlayer]-1];
     if (cardDrawn == copper || cardDrawn == silver || cardDrawn == gold)
-      drawntreasure--;
+      drawntreasure++;
     else {
       temphand[z] = cardDrawn;
       state->handCount[currentPlayer]--;
@@ -674,7 +674,7 @@ int rfSmithy(struct gameState *state, int handPos) {
   int currentPlayer = whoseTurn(state);
   for (i = 0; i < 3; i++)
     drawCard(currentPlayer, state);
-  discardCard(handPos, currentPlayer, state, 1);
+  discardCard(handPos, currentPlayer, state, 0);
   return 0;
 }
 
@@ -692,7 +692,7 @@ int rfSteward(struct gameState *state, int choice1, int choice2, int choice3, in
     drawCard(currentPlayer, state);
     drawCard(currentPlayer, state);
   }
-  else if (choice2 == 2)
+  else if (choice1 == 2)
     state->coins = state->coins + 2;
   else {
     discardCard(choice2, currentPlayer, state, 1);
