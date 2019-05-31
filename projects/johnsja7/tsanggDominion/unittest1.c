@@ -65,7 +65,7 @@ int main ()
                 }
         }
 
-        assert(stateCount - discarded == testCount);
+        assert(stateCount == testCount);
 	printf("Card in Hand Test - PASSED!\n");
 
 	//TEST 3

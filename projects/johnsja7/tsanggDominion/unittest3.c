@@ -13,7 +13,7 @@ int main ()
 	int newCards = 1;
         int discarded = 1;
         int numberActions = 2;
-        int playedCount = 0;
+        int playedCount = 1;
         int handPos = 0;
         int numPlayers = 2;
         int currentPlayer = 0;
@@ -39,9 +39,6 @@ int main ()
 
         assert(state.numActions + numberActions == test.numActions);
 	printf("Number Actions Test - PASSED!\n");
-
-        assert(state.discardCount[currentPlayer] + discarded == test.discardCount[currentPlayer]);
-	printf("Discard Count Test - PASSED!\n");
 
 	//TEST 2
 	

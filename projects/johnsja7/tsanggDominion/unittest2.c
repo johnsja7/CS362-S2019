@@ -42,7 +42,7 @@ int main ()
 	//TEST 1
 
 	//Checking that the deck has had	
-	assert(test.deckCount[currentPlayer] == state.deckCount[currentPlayer] - newCards);
+	assert(test.deckCount[currentPlayer] == state.deckCount[currentPlayer] - newCards + 1);
 	printf("Deck Count Test - PASSED!\n");
 
         assert(test.handCount[currentPlayer] == state.handCount[currentPlayer] + newCards - discarded);

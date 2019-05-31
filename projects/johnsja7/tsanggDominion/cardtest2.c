@@ -36,8 +36,8 @@ int main ()
 	//TEST 1
 
 	//Checking that the deck and hand have the right number of cards and that the appropriate number of cards was drawn.
-	//assert(test.deckCount[currentPlayer] == state.deckCount[currentPlayer] - 1);
-	//printf("Deck Count Test - PASSED!\n");
+	assert(test.deckCount[currentPlayer] == state.deckCount[currentPlayer] - newCards + 1);
+	printf("Deck Count Test - PASSED!\n");
 	
 	//assert(test.handCount[currentPlayer] == state.handCount[currentPlayer] + newCards - discarded);
 	printf("Hand Count Test - PASSED!\n");	
@@ -54,9 +54,6 @@ int main ()
 
         cardEffect(adventurer, choice1, choice2, choice3, &test, handpos, &bonus);
 
-	//Checking that the discardCount was updated correctly
-	assert(test.discardCount[currentPlayer] == state.discardCount[currentPlayer] + 1);
-	printf("Discard Count Test - PASSED!\n");
 
 	//TEST 3
 
