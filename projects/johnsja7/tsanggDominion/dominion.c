@@ -655,7 +655,7 @@ int rfAdventurer(struct gameState *state) {
     drawCard(currentPlayer, state);
     cardDrawn = state->hand[currentPlayer][state->handCount[currentPlayer]-1];
     if (cardDrawn == copper || cardDrawn == silver || cardDrawn == gold)
-      drawntreasure--;
+      drawntreasure++;
     else {
       temphand[z] = cardDrawn;
       state->handCount[currentPlayer]--;
